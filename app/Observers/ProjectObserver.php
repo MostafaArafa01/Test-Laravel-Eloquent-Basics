@@ -3,7 +3,8 @@
 namespace App\Observers;
 
 use App\Models\Project;
-use App\Models\Stat;
+use Illuminate\Support\Facades\DB;
+
 
 class ProjectObserver
 {
@@ -12,9 +13,7 @@ class ProjectObserver
      */
     public function created(Project $project): void
     {
-        $stat = Stat::first();
-        $stat->projects_count ++;
-        $stat->save();
+        DB::table('stats')->increment('projects_count');
     }
 
     /**
